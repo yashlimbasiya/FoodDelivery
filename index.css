@@ -40,3 +40,25 @@
     cursor: pointer;
     border: 1px solid black;
 }
+
+.shimmer{
+    
+    width: 200px;
+    height: 250px;
+    margin:20px;
+    background-color: lightgrey;
+}
+
+.r-list{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item-img{
+    width: 500px;
+}
+
+.restaurant-menu{
+    display: flex;
+    justify-content: space-between;
+}
