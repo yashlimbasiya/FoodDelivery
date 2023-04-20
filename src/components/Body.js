@@ -2,13 +2,9 @@ import { resList } from "./constants";
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
-import {Link} from "react-router-dom"
-
-function filterData(searchTxt, allRestaurants) {
-  return allRestaurants.filter((restaurant) =>
-    restaurant?.data?.name?.toLowerCase().includes(searchTxt.toLowerCase())
-  );
-}
+import { Link } from "react-router-dom";
+import useOnline from "../utils/useOnline";
+import { filterData } from "../utils/helper";
 
 const Body = () => {
   const [searchTxt, setSearchTxt] = useState("");
@@ -29,6 +25,12 @@ const Body = () => {
     setfilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards); // optional chaining
   }
   console.log("render");
+
+  const isOnline = useOnline(); // CUSTOM HOOK
+
+  if (!isOnline) {
+    return <h1> User is offline </h1>;
+  }
 
   //avoid render ,early render
   //   if(filteredRestaurants?.length ===0) return <h1>No Restaurants found. Match your filter!</h1>
@@ -55,9 +57,13 @@ const Body = () => {
       </button>
       <div className="res-container">
         {filteredRestaurants.map((restaurant) => (
-        <Link to={"/restaurant/" + restaurant.data.id} key={restaurant.data.id}  > 
-        <RestaurantCard resData={restaurant} />
-        </Link>))}
+          <Link
+            to={"/restaurant/" + restaurant.data.id}
+            key={restaurant.data.id}
+          >
+            <RestaurantCard resData={restaurant} />
+          </Link>
+        ))}
         {console.log("component update")}
       </div>
     </div>
