@@ -72,6 +72,11 @@ const Body = () => {
 
 export default Body;
 
+
+
+
+
+
 //update -execution of entire code happens once again (entire code)
 // re render means when line 35 to 63 is executed,
 // normal eye will not detect

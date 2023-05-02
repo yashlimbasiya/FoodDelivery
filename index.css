@@ -19,6 +19,10 @@
 .logo{
     width: 100px;
 }
+.cart{
+    display: flex;
+    flex-wrap: wrap;
+}
 
 .res-card{
     padding:5px;

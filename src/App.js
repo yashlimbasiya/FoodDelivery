@@ -10,6 +10,9 @@ import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import { lazy, Suspense } from "react";
 import Shimmer from "./components/Shimmer";
+import {Provider} from"react-redux";
+import Cart from "./components/Cart";
+import store from "./utils/store"
 // import InstaMart from "./components/instaMart";
 const InstaMart = lazy( ()=> import("./components/InstaMart"))
 // upon on demand component loading, React suspends it loading
@@ -26,9 +29,11 @@ const InstaMart = lazy( ()=> import("./components/InstaMart"))
 
 const AppLayout = () => (
   <div className="layout">
+    <Provider store={store}>
     <HeadingComponent />
     <Outlet />
     <Footer />
+    </Provider>
   </div>
 );
 
@@ -41,7 +46,7 @@ const appRouter = createBrowserRouter([
       { path: "/", element: <Body /> },
       { path: "/about", element: <About /> },
       { path: "/contact", element: <Contact /> },
-      { path: "/contact", element: <Contact /> },
+      { path: "/cart", element: <Cart /> },
       { path: "/instaMart", element:<Suspense fallback={<Shimmer/>}><InstaMart /> </Suspense> },
       { path: "/restaurant/:resid", element: <RestaurantMenu /> },    // dynamic route
     ],
